@@ -1,0 +1,267 @@
+/* =========================
+   Base y fondo (Index)
+   ========================= */
+* { margin: 0; padding: 0; }
+body {
+  font-family: 'Orbitron', sans-serif; /* respetamos tu tipografía */
+  background: url('../images/Espe-Sede-Santo-Domingo.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* =========================
+   Colores / utilitarios (tuyos)
+   ========================= */
+.bg-purple {
+  background: linear-gradient(180deg, rgba(2,37,5,.845), rgba(8,34,4,.707));
+}
+.bg-dark-purple1 {
+  background: rgba(247,247,248,.75);
+  border: 1px solid rgb(32,190,27) !important;
+}
+.text-light-purple { color: #489114; }
+
+.btn-primary {
+  background-color:#042904;
+  border-color:#316516;
+  transition: all .3s ease;
+}
+.btn-primary:hover {
+  background-color:#22c759;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20,3,30,.3);
+}
+
+/* =========================
+   Footer (mismo look, más compacto)
+   ========================= */
+.bg-dark-purple {
+  background: linear-gradient(0deg, #2e643b, #204534);
+}
+footer#soporte {
+  padding-top: 1.2rem !important;
+  padding-bottom: 1.2rem !important;
+}
+footer#soporte .row.g-4 { row-gap: .5rem !important; }
+footer#soporte h5 { margin-bottom:.5rem !important; font-size:1rem; }
+footer#soporte li,
+footer#soporte p,
+footer#soporte small { font-size:.92rem; }
+
+.social-icon {
+  color:#fff; font-size:1.25rem; width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:50%;
+  background: rgba(183,227,167,.1);
+  transition: all .3s ease;
+}
+.social-icon:hover {
+  color:#fff !important; background:#95c8a5;
+  transform: translateY(-5px) scale(1.1);
+}
+
+/* =========================
+   Responsivo footer
+   ========================= */
+@media (max-width: 992px) {
+  footer#soporte .row.g-4 > [class*="col-"] { margin-bottom: 1rem; }
+}
+@media (max-width: 768px) {
+  .footer-logo { text-align:center; }
+  .redes-sociales { justify-content:center; }
+  .col-md-6 { margin-bottom:2rem; }
+}
+@media (max-width: 576px) {
+  footer#soporte { padding-top: .9rem !important; padding-bottom: .9rem !important; }
+  footer#soporte h5 { font-size: .95rem; }
+  footer#soporte li, footer#soporte p, footer#soporte small { font-size: .9rem; }
+}
+
+/* =========================
+   Animación de entrada
+   ========================= */
+.drop-in { opacity:0; transform: translateY(-24px); animation: dropIn .7s ease-out forwards; }
+@keyframes dropIn { to { opacity:1; transform: translateY(0); } }
+.delay-1 { animation-delay:.1s } .delay-2 { animation-delay:.2s } .delay-3 { animation-delay:.3s } .delay-4 { animation-delay:.4s }
+
+/* =========================
+   FIX superposición (dropdown > carrusel)
+   ========================= */
+header.drop-in { position: relative; z-index: 3000; }
+.navbar { position: sticky; top: 0; z-index: 3100; }
+.dropdown-menu { z-index: 3200; overflow: visible; }
+header, .navbar, .dropdown, .navbar-collapse { overflow: visible !important; }
+
+/* =========================
+   Navbar responsive (logo izq / título centro / menú der)
+   ========================= */
+.navbar-brand img { height: 50px; }
+@media (max-width: 992px) {
+  .navbar .flex-grow-1 h4 {
+    font-size: 1rem;
+    line-height: 1.2;
+    white-space: normal;
+    margin: 0 .5rem;
+  }
+  .navbar-nav.flex-row { gap: .75rem; }
+}
+@media (max-width: 576px) {
+  .navbar { padding-top: .35rem; padding-bottom: .35rem; }
+  .navbar-brand img { height: 42px; }
+  .navbar .flex-grow-1 { max-width: 55%; }
+  .navbar .flex-grow-1 h4 { font-size: .85rem; line-height: 1.15; word-break: break-word; margin: 0 .25rem; }
+}
+
+/* =========================
+   Carrusel (Swiper): marco semitransparente
+   ========================= */
+.swiper {
+  width: 100%;
+  max-width: 900px;
+  margin: 32px auto 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: saturate(120%) blur(1.5px);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  position: relative;
+  z-index: 1; /* por debajo del dropdown */
+}
+
+/* Altura adaptable con clamp + vh */
+.swiper-slide { position: relative; height: clamp(360px, 68vh, 850px); }
+.swiper-slide .img-wrap { position: absolute; inset: 0; }
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* por defecto: puede recortar */
+  object-position: center;
+  display: block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Controles y bullets */
+.swiper-button-prev, .swiper-button-next { width: 46px; height: 46px; }
+.swiper-pagination { bottom: 10px !important; }
+.swiper-pagination-bullet { width: 10px; height: 10px; }
+
+/* Slides no activos algo atenuados */
+.swiper-slide { transition: opacity .4s ease; }
+.swiper-slide:not(.swiper-slide-active){ opacity:.87; }
+
+/* =========================
+   Captions separados
+   ========================= */
+.caption-date {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}
+.caption-date .badge {
+  background: rgba(74, 75, 74, 0.45);
+  text-shadow: 0 1px 2px rgba(0,0,0,.7);
+  font-size: .95rem;
+  padding: .35rem .6rem;
+}
+
+.caption-text {
+  position: absolute;
+  bottom: 48px;  /* sobre la paginación */
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 90%;
+  padding: 8px 14px;
+  color: #fff;
+  text-align: center;
+  background: rgba(74, 75, 74, 0.45);
+  border-radius: 8px;
+  font-size: .95rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,.7);
+}
+
+/* ===== Ajustes responsive carrusel / captions ===== */
+@media (max-width: 992px) { /* tablets */
+  .swiper { max-width: 95%; }
+  .swiper-slide { height: clamp(320px, 60vh, 620px); }
+  .caption-text { font-size: .92rem; bottom: 50px; max-width: 92%; }
+  .caption-date .badge { font-size: .85rem; }
+}
+@media (max-width: 576px) { /* teléfonos */
+  .swiper { max-width: 96%; box-shadow: 0 6px 18px rgba(0,0,0,.12); backdrop-filter: saturate(110%) blur(1px); }
+  .swiper-slide { height: clamp(300px, 54vh, 520px); }
+  .swiper-button-prev, .swiper-button-next { width: 40px; height: 40px; transform: translateY(-6px); }
+  .swiper-pagination-bullet { width: 12px; height: 12px; }
+
+  .caption-text {
+    bottom: 66px;
+    max-width: 86%;
+    padding: 6px 10px;
+    font-size: .82rem;
+    line-height: 1.15;
+    max-height: 38vh;       /* evita cubrir toda la foto */
+    overflow: auto;         /* scroll interno si es muy largo */
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .caption-text::-webkit-scrollbar { width: 6px; }
+  .caption-text::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 4px; }
+
+  .caption-date { bottom: 18px; left: 10px; }
+  .caption-date .badge { font-size: .78rem; padding: .25rem .5rem; }
+}
+
+/* ===== Modo especial para retratos/panorámicas en móvil ===== */
+.swiper-slide img.fit-contain {       /* imagen vertical: mostrar completa */
+  object-fit: contain;
+  background: rgba(0,0,0,.35);
+}
+@media (max-width: 576px) {
+  .swiper-slide img.fit-width {       /* panorámica extrema en móvil */
+    object-fit: contain;
+    background: rgba(0,0,0,.35);
+  }
+}
+
+/* =========================
+   Estilos específicos para RESEÑA
+   ========================= */
+.body_resena {
+  position: relative;
+  background: url('../images/fondo_reseña.jpg') no-repeat center center/cover;
+  font-family: 'Orbitron', sans-serif;
+}
+.body_resena::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+/* Fondos translúcidos tipo glass para reseña */
+.bg-light-trans {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+}
+.bg-dark-trans {
+  background: rgba(11, 79, 42, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+/* Si usas .texto-reseña en reseña.html */
+.texto-reseña {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+.texto-reseña h1,
+.texto-reseña h2,
+.texto-reseña h3,
+.texto-reseña p {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
